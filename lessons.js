@@ -1,9 +1,9 @@
 // Vue Object holding all the information that is displayed in the html {{}} tags
-new Vue({
+let store = new Vue({
     el: "#app",
     data: {
         showProduct: true,
-        products: products,
+        products: {},
 
         // FORM
         form: {
@@ -14,6 +14,19 @@ new Vue({
         //Checkout
         cart: [],
         errors: [],
+    },
+    created: function(){
+        fetch("https://cst3145-cw2-heroku-back-end.herokuapp.com/collection/products").then(
+            function (response) {
+                response.json().then(
+                    function (json) {
+
+                        store.products =  json;
+
+
+                    });
+            })
+
     },
 
     computed: {
